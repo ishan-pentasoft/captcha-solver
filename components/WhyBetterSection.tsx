@@ -19,19 +19,28 @@ const itemVariants: Variants = {
 
 const features = [
   {
-    icon: <Activity className="w-10 h-10 text-primary" />,
-    title: "Flexible Usage Model",
+    icon: <Zap className="w-10 h-10 text-primary" />,
+    title: "Simple Integration",
     points: [
-      "Credit-based pricing with no subscriptions",
-      "Scales from testing to production workloads",
+      "Clean REST APIs",
+      "Clean request and response formats",
+      "Works with modern stacks and automation tools",
+    ],
+  },
+  {
+    icon: <Activity className="w-10 h-10 text-primary" />,
+    title: "Flexible Usage",
+    points: [
+      "Credit-based billing",
+      "Scales from low-volume testing to higher request usage",
     ],
   },
   {
     icon: <ShieldCheck className="w-10 h-10 text-primary" />,
     title: "Reliable Infrastructure",
     points: [
-      "Designed for high availability and fault tolerance",
-      "Production-ready APIs with monitoring in place",
+      "Designed for consistent performance",
+      "Suitable for both testing and production workloads",
     ],
   },
   {
@@ -40,14 +49,6 @@ const features = [
     points: [
       "Supports high concurrency and parallel requests",
       "Custom capacity planning for enterprise use cases",
-    ],
-  },
-  {
-    icon: <Zap className="w-10 h-10 text-primary" />,
-    title: "Developer-Friendly Integration",
-    points: [
-      "Simple REST APIs with clear documentation",
-      "Works with modern stacks and automation tools",
     ],
   },
 ];

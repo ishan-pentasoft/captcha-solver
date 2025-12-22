@@ -1,28 +1,105 @@
 # Text CAPTCHA API
+Parse and extract the final answer from text-based CAPTCHAs or challenge prompts using an LLM-powered reasoning pipeline.
 
 **Endpoint:** `POST /api/public/textCaptcha`
 
-**Request body (JSON):**
 
-```json
-{ "text": "<full captcha or text to parse>" }
+## Authentication
+
+All requestdesigned to scale with production workloadss must include a valid API key in the request headers:
+```
+"x-api-key": YOUR_API_KEY
 ```
 
-**Response (200):**
+Requests without an API key or with an invalid key will be rejected.
+
+
+## Credits & Usage
+
+- **Cost per request**: 8 credits
+
+- Credits are deducted before processing the request.
+
+- If the user has fewer than 8 credits, the request will fail.
+
+- Each successful request increments the user's **totalRequests** count.
+
+## Request body
+
+**Content-type:**  ```application/json```
 
 ```json
-{ "answer": "<extracted answer>" }
+{
+"text": "<full text to parse>"
+}
+```
+
+**Successful Response (200):**
+
+```json
+{
+"success": true,
+"message": "Received final result.",
+"answer": "<extracted answer>"
+}
+```
+
+The exact response fields depend on the output of ``parseFinalAnswer()``, but always return strict JSON.
+
+### **Error Responses:**
+
+**Missing text (400)**
+```
+{
+  "success": false,
+  "error": "text is required"
+}
+```
+
+**Missing API Key (401)**
+```
+{
+"error": "API key is required"
+}
+```
+
+**Invalid API Key (401)**
+```
+{
+"error": "Invalid or revoked API key"
+}
+```
+
+**Insufficient Credits (403)**
+```
+{
+"error": "Insufficient credits"
+}
+```
+
+**Server Error (500)**
+```
+{
+"success": false,
+"error": "Internal server error"
+}
 ```
 
 **Example (curl):**
 
 ```bash
 curl -X POST http://localhost:3000/api/public/textCaptcha \
-  -H "Content-Type: application/json" \
-  -d '{"text":"What is the color of the sky? Answer: blue"}'
+-H "Content-Type: application/json" \
+-H "x-api-key: YOUR_API_KEY" \
+-d '{"text":"What is the color of the sky? Answer: blue"}'
 ```
 
-**Notes:**
+**Implementation Notes**
 
-- The endpoint uses an LLM (OpenAI via `lib/textToText.ts`) to extract the final answer and returns strict JSON.
-- Ensure `OPENAI_API_KEY` is configured.
+- Uses OpenAI via ```parseFinalAnswer()``` in ```lib/textToText.ts```
+- The model extracts only the final answer, ignoring explanations
+- Output is returned as strict JSON
+- API key usage updates ```lastUsedAt```
+- Credit deduction and request tracking are atomic per request
+
+If you need **[Image CAPTCHA API](/docs/api/image-captcha)** or  **[Audio CAPTCHA API](/docs/api/voice-captcha)**, see the related API documentation sections.

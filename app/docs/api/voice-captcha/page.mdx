@@ -1,34 +1,114 @@
 # Voice CAPTCHA API
+Transcribe audio-based CAPTCHAs into clean, human‑readable text using a speech‑to‑text pipeline powered by ElevenLabs.
 
 **Endpoint:** `POST /api/public/voiceCaptcha`
 
-**Supported requests:**
 
-1. Multipart form upload with a file field named `file` (e.g. `-F "file=@audio.mp3"`).
-2. JSON body with `{ "url": "https://example.com/audio.mp3" }`.
+## Authentication
 
-**Response (200):**
+All requests must include a valid API key in the request headers:
+```
+"x-api-key": YOUR_API_KEY
+```
+
+Requests without an API key or with an invalid key will be rejected.
+
+
+## Credits & Usage
+
+- **Cost per request**: 10 credits
+
+- Credits are deducted before transcription.
+
+- If the user has fewer than 10 credits, the request will fail.
+
+- Each successful request increments the user's **totalRequests** count.
+
+## Request options
+
+**Option 1: Upload Audio File (multipart/form-data)**
+
+**Content-type:**  ```multipart/form-data```
+
+**Option 2: Audio URL (application/json)**
+
+**Content-type:**  ```application/json```
 
 ```json
-{ "sentence": "<transcribed sentence>" }
+{
+"url": "https://example.com/recaptcha-audio.mp3"
+}
 ```
 
-**Example (curl, upload):**
+**Successful Response (200):**
 
+```json
+{
+"success": true,
+"message": "Audio transcribed successfully",
+"sentence": "<normalized transcription>"
+}
+```
+
+**Notes**
+
+- The sentence field contains a cleaned and normalized transcription
+- Background markers such as (static sound) are removed
+- Extra whitespace is collapsed
+- The result is optimized for CAPTCHA-style short audio clips
+
+### **Error Responses:**
+
+**Missing Audio Input (400)**
+```
+{
+"success": false,
+"error": "Provide either a 'file' or a 'url'."
+}
+```
+
+**Missing API Key (401)**
+```
+{
+"error": "API key is required"
+}
+```
+
+**Insufficient Credits (403)**
+```
+{
+"error": "Insufficient credits"
+}
+```
+
+**Server Error (500)**
+```
+{
+"error": "Failed to transcribe audio"
+}
+```
+
+**Examples**
+
+**Upload Audio File**
 ```bash
 curl -X POST http://localhost:3000/api/public/voiceCaptcha \
-  -F "file=@captcha.mp3"
+-H "x-api-key: YOUR_API_KEY" \
+-F "file=@captcha.mp3"
 ```
 
-**Example (curl, URL):**
-
+**Transcribe from Audio URL**
 ```bash
 curl -X POST http://localhost:3000/api/public/voiceCaptcha \
-  -H "Content-Type: application/json" \
-  -d '{"url":"https://example.com/captcha.mp3"}'
+-H "x-api-key: YOUR_API_KEY" \
+-F "file=@captcha.mp3"
 ```
 
-**Notes:**
+**Implementation Notes**
 
-- The endpoint uses ElevenLabs (`lib/voiceToText.ts`) to transcribe audio to text. Make sure `ELEVENLABS_API_KEY` is set.
-- Returns a normalized short sentence in the `sentence` field and raw transcription under `transcription` when available (internal use).
+- Uses ElevenLabs Speech‑to‑Text (scribe_v1 model)
+- Supports diarization and audio event tagging internally
+- Normalizes output to remove static/background markers
+- Credit deduction and request tracking are atomic per request
+
+If you need **[Text CAPTCHA API](/docs/api/text-captcha)** or  **[Image CAPTCHA API](/docs/api/image-captcha)**, see the related API documentation sections.

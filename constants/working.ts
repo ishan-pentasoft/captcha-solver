@@ -3,24 +3,24 @@ export const workingSteps = [
     step: "01",
     title: "Create an Account",
     description:
-      "Sign up to access your dashboard, manage API keys, and monitor usage securely.",
+      "Sign up to access your dashboard, manage API keys, and monitor usage.",
   },
   {
     step: "02",
-    title: "Purchase a Plan",
+    title: "Purchase Credits",
     description:
-      "Select a pricing plan to activate your account and unlock CAPTCHA-solving APIs.",
+      "Credits are required to make API requests and are deducted per accepted request. New accounts may receive free credits to get started.",
   },
   {
     step: "03",
-    title: "Get Your API Key",
+    title: "Generate an API Key",
     description:
-      "Generate a unique API key from your dashboard to authenticate all API requests.",
+      "Generate API key from your dashboard to authenticate all API requests.",
   },
   {
     step: "04",
     title: "Solve CAPTCHA Challenges",
     description:
-      "Send image, text, or audio CAPTCHA data to our API and receive AI-powered results in seconds.",
+      "Send image, text, or audio CAPTCHA data to the appropriate API endpoint and receive results in response.",
   },
 ];

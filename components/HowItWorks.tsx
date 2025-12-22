@@ -86,15 +86,8 @@ export default function HowItWorks() {
               className="text-primary font-semibold"
               variants={itemVariants}
             >
-              Simple integration process
+              From CAPTCHA input to result in a few simple steps.{" "}
             </motion.p>
-
-            <motion.h3
-              className="mt-2 text-2xl font-semibold"
-              variants={itemVariants}
-            >
-              From CAPTCHA input to AI-generated result
-            </motion.h3>
 
             <motion.div className="mt-8 space-y-6">
               {workingSteps.map((item) => (
@@ -154,12 +147,12 @@ export default function HowItWorks() {
             variants={codeBlockVariants}
           >
             <div className="flex items-center justify-between mb-3 text-xs">
-              <span>Example: Solve Image CAPTCHA</span>
+              <span>Example: Solve an Image CAPTCHA</span>
               <span>POST /api/public/imageCaptcha</span>
             </div>
 
             <p className="mb-3 text-xs">
-              Requires an active plan and valid API key
+              Requires a valid API key and sufficient credits{" "}
             </p>
 
             <pre className="leading-relaxed">
@@ -167,7 +160,7 @@ export default function HowItWorks() {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "x-api-key": "Bearer YOUR_API_KEY",
+    "x-api-key": "YOUR_API_KEY",
   },
   body: JSON.stringify({
     imageUrl: "https://example.com/captcha.png",
@@ -184,7 +177,7 @@ console.log(data.text);`}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.1, duration: 0.6 }}
             >
-              ✓ Captcha solved successfully
+              If request is valid, API returns the extracted text in response.
             </motion.div>
           </motion.div>
         </motion.div>

@@ -17,7 +17,7 @@ export const blogs: Blog[] = [
     author: "Jane Doe",
     date: "16 Dec 2025",
     tag: "Testing",
-    link: "/blogs/captcha-testing-integration",
+    link: "/blogs",
   },
   {
     title: "Improving Accessibility with Audio CAPTCHA Support",
@@ -27,7 +27,7 @@ export const blogs: Blog[] = [
     author: "John Smith",
     date: "12 Dec 2025",
     tag: "Accessibility",
-    link: "/blogs/audio-captcha-accessibility",
+    link: "/blogs/",
   },
   {
     title: "Designing Secure & Compliant CAPTCHA Pipelines",
@@ -37,6 +37,6 @@ export const blogs: Blog[] = [
     author: "Alice Lee",
     date: "10 Dec 2025",
     tag: "Developer",
-    link: "/blogs/secure-captcha-pipelines",
+    link: "/blogs/",
   },
 ];

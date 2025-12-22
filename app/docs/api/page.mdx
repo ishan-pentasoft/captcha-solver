@@ -1,95 +1,91 @@
-# Basic API Instructions
+#  CAPTCHA APIs Overview
 
-This page explains the core concepts and requirements for interacting with our CAPTCHA Solver APIs.  
-Before making requests, ensure you have an active account, sufficient credits, and a valid API key.
+A unified set of APIs to solve Image, Text, and Voice CAPTCHAs using AI-powered OCR, reasoning, and speech-to-text pipelines.
 
 ---
-
-## Base URL
-
-All API requests are made over HTTPS.
-
-```http
-https://api.yourcaptchasolver.com
-```
 
 ## Authentication
 
-All API requests must be authenticated using your API key.
+All endpoints require a valid API key.
 
-**Authorization Header**
-
-Include your API key in the request headers:
-
-```http
-Authorization: Bearer YOUR_API_KEY
 ```
+"x-api-key": YOUR_API_KEY
+```
+
+If the API key is missing, invalid, or revoked, requests will be rejected.
 
 **Note -** Never expose your API key in client-side code or public repositories.
 
-## Content Type
+## Credit system
 
-All requests and responses use JSON format.
+|  API Type	      | Endpoint         	                             | Cost per Request |
+|-----------------|---------------------------------------------------|------------------|
+|  Image CAPTCHA  | [/api/public/imageCaptcha](/docs/api/image-captcha) | 10 credits       |
+|  Text CAPTCHA   | [/api/public/textCaptcha](/docs/api/text-captcha)	 | 8 credits        | 
+|  Voice CAPTCHA  | [/api/public/voiceCaptcha](/docs/api/voice-captcha) | 10 credits       |
 
-```http
-Content-Type: application/json
-```
+- Credits are deducted before processing
 
-## Request Flow Overview
+- Requests fail if the user has insufficient credits
 
-Most CAPTCHA-solving requests follow this standard flow:
+- Each successful request increments totalRequests
 
-1. Submit a CAPTCHA-solving request  
-2. Receive a task ID (if processing is required)  
-3. Retrieve the task result  
-4. Handle the response or error  
+## Image CAPTCHA API
 
-Some tasks return results immediately, while others may require polling.
+Extract all readable text from image-based CAPTCHAs.
 
----
+- Endpoint: ``POST /api/public/imageCaptcha``
 
-## Creating a CAPTCHA Task
+- Input: Image URL (JSON)
 
-To solve a CAPTCHA, submit a request to the appropriate endpoint based on the CAPTCHA type.
+- Output: Extracted text with original casing and spacing
 
-## API Reference
+See **[Image CAPTCHA API](/docs/api/image-captcha)** Documentation for full details.
 
-This section documents the public API endpoints available in this project.
 
-- [/api/public/textCaptcha](./api/text-captcha) — Extract the final answer from a text input.
-- [/api/public/imageCaptcha](./api/image-captcha) — Extract readable text from an image URL.
-- [/api/public/voiceCaptcha](./api/voice-captcha) — Transcribe audio from file upload or public URL.
+## Text CAPTCHA API
 
-Each endpoint accepts POST requests and returns JSON.
+Extract the final answer from text-based challenges.
 
----
+- Endpoint: ``POST /api/public/textCaptcha``
 
-## Rate Limits
+- Input: Raw text (JSON)
 
-To ensure fair usage and platform stability, rate limits may apply.
+- Output: Final answer in strict JSON
 
-If you exceed allowed limits, requests may be temporarily blocked.  
-Refer to the **Rate Limits** section for detailed thresholds.
+See **[Text CAPTCHA API](/docs/api/text-captcha)** Documentation for full details.
+
+## Voice CAPTCHA API
+
+Transcribe audio CAPTCHAs into clean, readable text.
+
+- Endpoint: ``POST /api/public/voiceCaptcha``
+
+- Input: Audio file or audio URL
+
+- Output: Normalized transcription
+
+See **[Voice CAPTCHA API](/docs/api/voice-captcha)** Documentation for full details.
+
+## Common Error Codes
+
+| Status |	Meaning                    |
+|--------|-----------------------------|
+| 400	 |  Invalid or missing input   |
+| 401	 |  Missing / invalid API key  |
+| 403	 |  Insufficient credits       |
+| 500	 |  Internal server error      |
 
 ---
 
 ## Best Practices
 
-- Keep API keys secure
-- Validate input before sending requests
+- Always check credit balance before high-volume usage
+- Prefer header-based API keys for security
 - Handle pending task states gracefully
-- Implement retries with exponential backoff
-- Monitor credit usage from the dashboard
+- Use HTTPS for all requests
+- Cache results when possible to reduce credit usage
 
 ---
-
-## Next Steps
-
-Now that you understand the basics, explore:
-
-- Supported CAPTCHA task types
-- Detailed API reference
-- Error codes and troubleshooting
-- Performance and scalability guidelines
 
 If you need assistance, contact our support team or browse the rest of the documentation.

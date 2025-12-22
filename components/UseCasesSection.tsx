@@ -38,13 +38,13 @@ const useCases = [
     icon: Bot,
   },
   {
-    title: "Accessibility Support",
+    title: "Accessibility Support workflows",
     description:
       "Assist users who rely on audio or alternative CAPTCHA solutions.",
     icon: Globe,
   },
   {
-    title: "Internal Tooling",
+    title: "Internal tools and controlled environments",
     description:
       "Integrate CAPTCHA handling into internal tools and controlled environments.",
     icon: Database,
@@ -86,11 +86,11 @@ export default function UseCasesSection() {
           variants={itemVariants}
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-            Built for Authorized Automation & Testing
+            Built for Authorized Use Cases
           </h2>
           <p className="mt-4">
-            Our CAPTCHA-solving APIs support accessibility, testing, and
-            authorized automation workflows across multiple industries.
+            Our APIs are intended for responsible and authorized automation,
+            including:
           </p>
         </motion.div>
 

@@ -20,15 +20,15 @@ export default function TextCaptchaPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-              <Sparkles className="w-4 h-4" /> AI-Powered OCR
+              <Sparkles className="w-4 h-4" /> AI-Powered Text Parsing
             </span>
             <h1 className="mt-6 text-5xl md:text-6xl font-extrabold tracking-tight">
               Text-to-Text CAPTCHA Solver
             </h1>
             <p className="mt-6 text-lg">
-              Instantly extract answers from text CAPTCHAs using advanced AI
-              models. Trusted by 500+ developers for quizzes, verification, and
-              automation workflows.
+              Extract final answers from text-based CAPTCHA challenges using a
+              simple, synchronous API designed for authorized automation and
+              testing workflows.
             </p>
           </motion.div>
 
@@ -53,13 +53,15 @@ export default function TextCaptchaPage() {
           <div className="space-y-2">
             <h2 className="text-4xl font-bold">What is a Text CAPTCHA?</h2>
             <p className="text-lg">
-              Text CAPTCHAs present questions, scrambled words, or puzzles to
-              prevent automated bots from accessing content.
+              Text CAPTCHAs present written prompts or questions intended to
+              verify human understanding before granting access. These
+              challenges may include short questions, instruction-based prompts
+              or text requiring interpretation or extraction.
             </p>
-            <p>
-              Solving them manually can be slow and error-prone. Our AI-powered
-              solver extracts answers instantly and accurately, even for complex
-              or obfuscated text.
+            <p className="text-lg">
+              Our Text CAPTCHA API processes provided text and returns the
+              extracted final answer when possible, removing the need for manual
+              handling in authorized workflows.
             </p>
           </div>
         </section>
@@ -75,7 +77,7 @@ export default function TextCaptchaPage() {
           >
             <h2 className="text-4xl font-bold text-background">How It Works</h2>
             <p className="mt-4 text-background">
-              Simple three-step workflow to extract answers from text CAPTCHAs:
+              Simple, synchronous processing — no background jobs or polling.{" "}
             </p>
           </motion.div>
 
@@ -98,21 +100,19 @@ export default function TextCaptchaPage() {
             <div className="flex flex-col items-center gap-4">
               <Loader2 className="w-12 h-12 text-primary" />
               <h4 className="text-xl font-semibold text-background">
-                2. AI Processing
+                2. Text Processing
               </h4>
               <p className="text-center text-background">
-                Advanced AI interprets the text and computes or extracts the
-                correct answer.
+                The API analyzes the input text to determine the final answer.
               </p>
             </div>
             <div className="flex flex-col items-center gap-4">
               <Sparkles className="w-12 h-12 text-primary" />
               <h4 className="text-xl font-semibold text-background">
-                3. Receive Answer
+                3. Receive Result
               </h4>
               <p className="text-center text-background">
-                Get the extracted answer instantly, ready for automation,
-                verification, or quizzes.
+                The extracted answer is returned directly in the response.
               </p>
             </div>
           </motion.div>
@@ -127,10 +127,9 @@ export default function TextCaptchaPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold">Key Features</h2>
+            <h2 className="text-4xl font-bold">Key Capabilities</h2>
             <p className="mt-4">
-              Designed for developers and enterprises seeking fast, reliable,
-              and accurate text CAPTCHA solutions.
+              Designed to integrate cleanly into developer workflows.
             </p>
           </motion.div>
           <motion.div
@@ -143,13 +142,13 @@ export default function TextCaptchaPage() {
             {[
               {
                 icon: Upload,
-                title: "AI-Powered Parsing",
-                desc: "Automatically detects and extracts answers from text CAPTCHAs.",
+                title: "Text CAPTCHA Parsing",
+                desc: "Processes text-based CAPTCHA prompts and extracts final answers.",
               },
               {
                 icon: Loader2,
-                title: "Fast Processing",
-                desc: "Solves text CAPTCHAs in under a second for real-time workflows.",
+                title: "Synchronous API",
+                desc: "Requests return results directly in the response body.",
               },
               {
                 icon: Sparkles,
@@ -158,18 +157,18 @@ export default function TextCaptchaPage() {
               },
               {
                 icon: ImageIcon,
-                title: "Batch Support",
-                desc: "Process multiple text CAPTCHAs at once with minimal latency.",
+                title: "Secure Authentication",
+                desc: "All requests require a valid API key and sufficient credits.",
               },
               {
                 icon: Upload,
-                title: "Flexible Integration",
-                desc: "Works with API, scripts, or automation tools for easy deployment.",
+                title: "Developer-Friendly Integration",
+                desc: "Works with scripts, backend services, and automation tools.",
               },
               {
                 icon: Loader2,
-                title: "Supports Multiple Text Types",
-                desc: "Handles arithmetic, copy tasks, and multi-choice questions seamlessly.",
+                title: "API-First Design",
+                desc: "Simple REST endpoint compatible with modern stacks.",
               },
             ].map((feature, i) => (
               <div
@@ -202,14 +201,19 @@ export default function TextCaptchaPage() {
 
           <pre className="rounded-2xl bg-gray-700 p-6 text-sm text-green-400 overflow-x-auto">
             {`POST /api/public/textCaptcha
-Content-Type: application/json
 
+Content-Type: application/json
+x-api-key: YOUR_API_KEY
+
+Request:
 {
   "text": "Question or CAPTCHA text"
 }
 
+
 Response:
 {
+  "success": true,
   "answer": "Extracted final answer"
 }`}
           </pre>
@@ -218,11 +222,7 @@ Response:
             <h4 className="text-xl font-semibold text-background">
               Step 1: Submit Text
             </h4>
-            <p>
-              Send a POST request to{" "}
-              <code className="text-green-400">/api/public/textCaptcha</code>{" "}
-              with the text to solve.
-            </p>
+            <p>Send a POST request with the text input.</p>
 
             <h4 className="text-xl font-semibold text-background">
               Step 2: Receive Result
@@ -233,13 +233,28 @@ Response:
             </p>
 
             <h4 className="text-xl font-semibold text-background">
-              Step 3: Error Handling
+              Step 3: Handle Errors
             </h4>
             <p>
-              Missing or invalid text returns a{" "}
-              <code className="text-red-400">400</code> error. Processing
-              failures return a <code className="text-red-400">500</code> error
-              with a descriptive message.
+              The API returns appropriate HTTP status codes, such as
+              <ul className="mt-2">
+                <li>
+                  <code className="text-red-400">400</code> for missing or
+                  invalid text.
+                </li>
+                <li>
+                  <code className="text-red-400">401</code> for missing or
+                  invalid API key.
+                </li>
+                <li>
+                  <code className="text-red-400">403</code> for insufficient
+                  credits.
+                </li>
+                <li>
+                  <code className="text-red-400">500</code> for internal
+                  processing errors.
+                </li>
+              </ul>
             </p>
           </div>
         </motion.div>

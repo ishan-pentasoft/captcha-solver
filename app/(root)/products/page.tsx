@@ -32,16 +32,16 @@ export default function ProductsPage() {
             data-intensive workflows.
           </p>
           <div className="mt-10 flex gap-4 justify-center flex-wrap">
-            <a
+            {/* <a
               href="mailto:support@captchasolver.com"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-background font-semibold hover:bg-primary/90 transition"
+              className="inline-flex items-center gap-2 rounded-lg border border-primary px-6 py-3 text-primary font-semibold hover:bg-primary hover:text-background transition"
             >
               Talk to Sales <ArrowRight className="w-4 h-4" />
-            </a>
+            </a> */}
             <a
               href="/signup"
               target="_blank"
-              className="inline-flex items-center gap-2 rounded-lg border border-primary px-6 py-3 text-primary font-semibold hover:bg-primary hover:text-background transition"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-background font-semibold hover:bg-primary/90 transition"
             >
               Get Free Trial <ArrowRight className="w-4 h-4" />
             </a>
@@ -51,7 +51,7 @@ export default function ProductsPage() {
         {/* Products Section */}
         <section className="relative max-w-screen-2xl mx-auto px-4 py-24">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Solve Any CAPTCHA, Effortlessly
+            Solve CAPTCHA Challenges Effortlessly
           </h2>
           <motion.div
             className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"

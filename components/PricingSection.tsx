@@ -43,7 +43,7 @@ export default function PricingSection() {
           variants={cardVariants}
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-            <Sparkles className="w-4 h-4" /> Start for free with 500 credits.
+            <Sparkles className="w-4 h-4" /> New accounts receive free credits to get started.
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mt-2">
             Simple & Transparent Pricing

@@ -36,8 +36,8 @@ export default function CTASection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-4 text-background/50 sm:text-lg max-w-5xl mx-auto"
         >
-          Automate image, text, and audio CAPTCHA solving with our fast,
-          developer-friendly API — built for reliability, speed, and scale.
+          Automate image, text, and audio CAPTCHA solving with a simple API
+          workflow.
         </motion.p>
 
         {/* CTA */}

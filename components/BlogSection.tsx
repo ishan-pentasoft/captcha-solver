@@ -35,11 +35,11 @@ export default function BlogSection() {
           variants={itemVariants}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-background">
-            Insights & Developer Guides
+            Insights & Developer Resources
           </h2>
           <p className="mt-3 text-background/50">
-            Latest insights, tutorials, and best practices for building
-            accessible and authorized automation with our APIs.
+            Explore guides and best practices for building accessible and
+            authorized CAPTCHA workflows using our APIs.
           </p>
         </motion.div>
 
@@ -77,7 +77,9 @@ export default function BlogSection() {
                         {post.author}
                       </span>
                     </div>
-                    <span className="text-sm text-background/70">{post.date}</span>
+                    <span className="text-sm text-background/70">
+                      {post.date}
+                    </span>
                   </div>
                   {post.tag && (
                     <span className="mt-3 inline-block text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">

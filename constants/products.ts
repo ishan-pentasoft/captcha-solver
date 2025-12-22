@@ -12,38 +12,44 @@ export const products: Product[] = [
   {
     title: "Image CAPTCHA Solver",
     description:
-      "Automatically extract text from image-based CAPTCHAs using AI. Ideal for websites using visual CAPTCHA challenges.",
+      "Extract text from image-based CAPTCHAs using AI. Ideal for websites using visual CAPTCHA challenges.",
     icon: Image,
     apiEndpoint: "/products/image-captcha",
     example: `const response = await fetch("/api/public/imageCaptcha", {
   method: "POST",
-  headers: {
+  headers: 
+  {
     "Content-Type": "application/json",
-    "x-api-key": "Bearer YOUR_API_KEY",
+    "x-api-key": "YOUR_API_KEY",
   },
   body: JSON.stringify({
     imageUrl: "https://example.com/captcha.png",
   }),
 });
+
 const data = await response.json();
 console.log(data.text);`,
   },
   {
     title: "Text CAPTCHA Solver",
     description:
-      "Submit textual CAPTCHAs and get AI-generated responses instantly. Useful for challenges that require human-like understanding of text prompts.",
+      "Process text-based CAPTCHA challenges and return an AI-generated answer. Useful for challenges that require human-like understanding of text prompts.",
     icon: Bot,
     apiEndpoint: "/products/text-captcha",
     example: `const response = await fetch("/api/public/textCaptcha", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "x-api-key": "Bearer YOUR_API_KEY",
+    "x-api-key": "YOUR_API_KEY",
   },
-  body: JSON.stringify({ text: "Solve this CAPTCHA" }),
+  body: JSON.stringify({
+    text: "Solve this CAPTCHA",
+  }),
 });
+
 const data = await response.json();
-console.log(data.answer);`,
+console.log(data.text);
+`,
   },
   {
     title: "Voice CAPTCHA Solver",
@@ -52,18 +58,21 @@ console.log(data.answer);`,
     icon: Mic,
     apiEndpoint: "/products/voice-captcha",
     example: `const formData = new FormData();
-formData.append("url", 
-"https://example.com/audioCaptcha.mp3");
+formData.append(
+  "url",
+  "https://example.com/recaptcha.mp3"
+);
 
 const response = await fetch("/api/public/voiceCaptcha", {
   method: "POST",
   headers: {
-    "x-api-key": "Bearer YOUR_API_KEY",
+    "x-api-key": "YOUR_API_KEY",
   },
   body: formData,
 });
 
 const data = await response.json();
-console.log(data.sentence);`,
+console.log(data.text);
+`,
   },
 ];

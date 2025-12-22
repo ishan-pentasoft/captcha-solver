@@ -26,15 +26,15 @@ export default function VoiceCaptchaPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-              <Sparkles className="w-4 h-4" /> AI-Powered Audio OCR
+              <Sparkles className="w-4 h-4" /> AI-Powered Speech-to-text
             </span>
             <h1 className="mt-6 text-5xl md:text-6xl font-extrabold tracking-tight">
               Audio-to-Text CAPTCHA Solver
             </h1>
             <p className="mt-6 text-lg">
-              Instantly transcribe and extract answers from audio CAPTCHAs using
-              advanced AI models. Trusted by developers for automation and
-              verification workflows.
+              Transcribe audio CAPTCHA challenges into clean, human-readable
+              text using a simple, synchronous API designed for authorized
+              automation and accessibility workflows.
             </p>
           </motion.div>
 
@@ -46,7 +46,7 @@ export default function VoiceCaptchaPage() {
               Try Live Demo <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="/docs/api/audio-captcha"
+              href="/docs/api/voice-captcha"
               className="inline-flex items-center gap-2 rounded-xl border border-primary px-8 py-4 font-semibold text-primary hover:bg-primary hover:text-background transition"
             >
               View API Docs <ArrowRight className="w-4 h-4" />
@@ -59,13 +59,16 @@ export default function VoiceCaptchaPage() {
           <div className="space-y-2">
             <h2 className="text-4xl font-bold">What is a Audio CAPTCHA?</h2>
             <p className="text-lg">
-              Audio CAPTCHAs play audio prompts or spoken challenges to prevent
-              automated bots from accessing content.
+              Audio CAPTCHAs present spoken prompts as an alternative
+              verification method, often used for accessibility purposes. These
+              challenges play audio instructions that must be understood and
+              transcribed.
             </p>
-            <p>
-              Solving them manually is slow and error-prone. Our AI-powered
-              solver transcribes and extracts answers accurately, even from
-              noisy or complex audio.
+            <p className="text-lg">
+              Solving them manually is slow and error-prone. Our Audio CAPTCHA
+              API converts provided audio CAPTCHA input into readable text,
+              removing the need for manual transcription in authorized
+              workflows.
             </p>
           </div>
         </section>
@@ -81,7 +84,8 @@ export default function VoiceCaptchaPage() {
           >
             <h2 className="text-4xl font-bold text-background">How It Works</h2>
             <p className="mt-4 text-background">
-              Simple three-step workflow to extract answers from audio CAPTCHAs:
+              A simple request-response workflow — no background jobs or
+              polling.{" "}
             </p>
           </motion.div>
 
@@ -95,30 +99,30 @@ export default function VoiceCaptchaPage() {
             <div className="flex flex-col items-center gap-4">
               <Upload className="w-12 h-12 text-primary" />
               <h4 className="text-xl font-semibold text-background">
-                1. Upload or Provide URL
+                1. Provide Audio Input
               </h4>
               <p className="text-center text-background">
-                Upload an audio file or provide a link to the audio CAPTCHA.
+                Submit either an audio file upload or a direct audio URL.{" "}
               </p>
             </div>
             <div className="flex flex-col items-center gap-4">
               <Loader2 className="w-12 h-12 text-primary" />
               <h4 className="text-xl font-semibold text-background">
-                2. AI Transcription
+                2. Speech-to-Text Processing
               </h4>
               <p className="text-center text-background">
-                Advanced AI transcribes the audio and extracts the correct
-                answer.
+                The API transcribes spoken audio into text, filtering common
+                noise artifacts.
               </p>
             </div>
             <div className="flex flex-col items-center gap-4">
               <Sparkles className="w-12 h-12 text-primary" />
               <h4 className="text-xl font-semibold text-background">
-                3. Receive Answer
+                3. Receive Transcription
               </h4>
               <p className="text-center text-background">
-                Get the transcribed answer instantly for automation,
-                verification, or quizzes.
+                The transcribed sentence is returned directly in the API
+                response.
               </p>
             </div>
           </motion.div>
@@ -133,10 +137,9 @@ export default function VoiceCaptchaPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold">Key Features</h2>
+            <h2 className="text-4xl font-bold">Key Capabilities</h2>
             <p className="mt-4">
-              Designed for developers and enterprises seeking fast, reliable,
-              and accurate audio CAPTCHA solutions.
+              Designed to integrate cleanly into developer workflows.
             </p>
           </motion.div>
 
@@ -150,13 +153,13 @@ export default function VoiceCaptchaPage() {
             {[
               {
                 icon: Upload,
-                title: "AI-Powered Transcription",
-                desc: "Automatically transcribes and extracts answers from audio CAPTCHAs.",
+                title: "Speech-to-Text Transcription",
+                desc: "Converts audio CAPTCHA prompts into readable text.",
               },
               {
                 icon: Loader2,
-                title: "Fast Processing",
-                desc: "Transcribes audio and returns results in seconds for real-time workflows.",
+                title: "Synchronous API",
+                desc: "Results are returned directly in the response body.",
               },
               {
                 icon: Sparkles,
@@ -165,18 +168,18 @@ export default function VoiceCaptchaPage() {
               },
               {
                 icon: ImageIcon,
-                title: "Batch Support",
-                desc: "Process multiple audio CAPTCHAs simultaneously with minimal latency.",
+                title: "Secure Authentication",
+                desc: "All requests require a valid API key and sufficient credits.",
               },
               {
                 icon: Upload,
-                title: "Flexible Integration",
-                desc: "Works with API, scripts, or automation tools for easy deployment.",
+                title: "Developer-friendly Integration",
+                desc: "Works with backend services, scripts, and automation tools.",
               },
               {
                 icon: Loader2,
-                title: "Supports Multiple Formats",
-                desc: "Handles MP3, WAV, and other common audio formats.",
+                title: "Multiple Input Methods",
+                desc: "Supports both file uploads and audio URLs.",
               },
             ].map((feature, i) => (
               <div
@@ -211,7 +214,9 @@ export default function VoiceCaptchaPage() {
           {/* CODE BLOCK */}
           <pre className="rounded-2xl bg-gray-700 p-6 text-sm text-green-400 overflow-x-auto">
             {`POST /api/public/voiceCaptcha
+
 Content-Type: multipart/form-data
+x-api-key: YOUR_API_KEY
 
 Form Data:
 - file: captcha-audio.mp3
@@ -219,16 +224,21 @@ Form Data:
 OR
 
 POST /api/public/voiceCaptcha
+
 Content-Type: application/json
+x-api-key: YOUR_API_KEY
 
 {
   "url": "https://example.com/audio-captcha.mp3"
 }
 
+
 Response:
 {
+  "success": true,
   "sentence": "please select all images containing traffic lights"
-}`}
+}
+`}
           </pre>
 
           {/* STEPS */}
@@ -237,9 +247,8 @@ Response:
               Step 1: Submit Audio
             </h4>
             <p>
-              Send a <code className="text-green-400">POST</code> request to{" "}
-              <code className="text-green-400">/api/public/voiceCaptcha</code>{" "}
-              with either:
+              Send a <code className="text-green-400">POST</code> request with
+              either:
             </p>
             <ul className="list-disc list-inside space-y-2">
               <li>
@@ -254,31 +263,35 @@ Response:
             </ul>
 
             <h4 className="text-xl font-semibold text-background">
-              Step 2: AI Transcription
-            </h4>
-            <p>
-              The API uses advanced speech-to-text models to transcribe the
-              audio, automatically removing noise such as static sounds and
-              formatting the sentence for accuracy.
-            </p>
-
-            <h4 className="text-xl font-semibold text-background">
-              Step 3: Receive Result
+              Step 2: Receive Result
             </h4>
             <p>
               A successful response returns a JSON object containing the
-              extracted CAPTCHA sentence, ready for automation or verification
-              workflows.
+              extracted CAPTCHA sentence.
             </p>
 
             <h4 className="text-xl font-semibold text-background">
-              Error Handling
+              Step 3: Handle Errors
             </h4>
             <p>
-              If neither an audio file nor URL is provided, the API returns a{" "}
-              <code className="text-red-400">400</code> error. Processing
-              failures return a <code className="text-red-400">500</code> error
-              with a descriptive message.
+              The API returns appropriate HTTP status codes, such as
+              <ul className="mt-2">
+                <li>
+                  <code className="text-red-400">400</code> for missing audio input.
+                </li>
+                <li>
+                  <code className="text-red-400">401</code> for missing or
+                  invalid API key.
+                </li>
+                <li>
+                  <code className="text-red-400">403</code> for insufficient
+                  credits.
+                </li>
+                <li>
+                  <code className="text-red-400">500</code> for internal
+                  processing errors.
+                </li>
+              </ul>
             </p>
           </div>
 

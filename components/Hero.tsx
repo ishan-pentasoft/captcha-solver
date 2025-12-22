@@ -55,7 +55,7 @@ export default function HeroSection() {
             variants={containerVariants}
           >
             <motion.h1
-              className="text-[42px] leading-tight md:text-[48px] font-bold tracking-tight"
+              className="text-5xl leading-tight font-bold tracking-tight"
               variants={itemVariants}
             >
               Effortless CAPTCHA Solving for Automation
@@ -65,10 +65,18 @@ export default function HeroSection() {
               className="mt-4 text-base md:text-lg"
               variants={itemVariants}
             >
-              Unlock reliable, fast, and scalable captcha solving with our{" "}
+              Solve image, text, and audio CAPTCHA challenges using{" "}
               <span className="font-semibold text-primary">
-                AI-powered CAPTCHA Solver APIs
+                fast, reliable, and developer-friendly APIs.{" "}
               </span>
+            </motion.p>
+            <motion.p
+              className="mt-4 text-base md:text-lg"
+              variants={itemVariants}
+            >
+              {" "}
+              Our platform provides purpose-built APIs for the most common
+              CAPTCHA formats:
             </motion.p>
 
             {/* Features */}

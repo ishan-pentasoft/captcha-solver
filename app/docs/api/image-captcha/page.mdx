@@ -1,28 +1,105 @@
 # Image CAPTCHA API
+Extract readable text from an image-based CAPTCHA using our Vision-powered OCR pipeline.
 
 **Endpoint:** `POST /api/public/imageCaptcha`
 
-**Request body (JSON):**
+
+## Authentication
+
+All requests must include a valid API key in the request headers:
+```
+"x-api-key": YOUR_API_KEY
+```
+
+Requests without an API key or with an invalid key will be rejected.
+
+
+## Credits & Usage
+
+- **Cost per request**: 10 credits
+
+- Credits are deducted before processing the image.
+
+- If the user has fewer than 10 credits, the request will fail.
+
+- Each successful request increments the user's **totalRequests** count.
+
+## Request body
+
+**Content-type:**  ```application/json```
 
 ```json
 { "imageUrl": "https://example.com/captcha.png" }
 ```
 
-**Response (200):**
+**Successful Response (200):**
 
 ```json
-{ "text": "<extracted text>" }
+{
+"success": true,
+"message": "Text extracted successfully.",
+"text": "<extracted text>"
+}
+```
+
+**Notes**
+
+- Extracted text preserves original casing, spacing, and line breaks as closely as possible.
+
+- The Vision model attempts to read all visible text, not only alphanumeric CAPTCHA characters.
+
+### **Error Responses:**
+
+**Missing imageUrl (400)**
+```
+{
+"success": false,
+"error": "imageUrl is required"
+}
+```
+
+**Missing API Key (401)**
+```
+{
+"error": "API key is required"
+}
+```
+
+**Invalid API Key (401)**
+```
+{
+"error": "Invalid or revoked API key"
+}
+```
+
+**Insufficient Credits (403)**
+```
+{
+"error": "Insufficient credits"
+}
+```
+
+**Server Error (500)**
+```
+{
+"success": false,
+"error": "Internal server error"
+}
 ```
 
 **Example (curl):**
 
 ```bash
 curl -X POST http://localhost:3000/api/public/imageCaptcha \
-  -H "Content-Type: application/json" \
-  -d '{"imageUrl":"https://example.com/captcha.png"}'
+-H "Content-Type: application/json" \
+-H "x-api-key: YOUR_API_KEY" \
+-d '{"imageUrl":"https://example.com/captcha.png"}'
 ```
 
-**Notes:**
+**Implementation Notes**
 
-- Uses OpenAI's Vision-style `input_image` flow in `lib/imageToText.ts` to extract all readable text.
-- Preserves original casing, spacing, and line breaks as much as possible.
+- Uses OpenAI Vision-style ```input_image``` flow via ```extractTextFromImage()```
+- API key usage updates ```lastUsedAt```
+- Credit deduction and request tracking are atomic per request
+
+If you need **[Text CAPTCHA API](/docs/api/text-captcha)** or  **[Audio CAPTCHA API](/docs/api/voice-captcha)**, see the related API documentation sections.

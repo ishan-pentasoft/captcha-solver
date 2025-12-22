@@ -18,8 +18,7 @@ export const pricingPlans = [
   {
     id: "Pro",
     name: "Pro",
-    description:
-      "Best for production workloads and higher request volume.",
+    description: "Best for production workloads and higher request volume.",
     price: "₹1200",
     credits: "14000",
     speed: "High",
@@ -35,8 +34,7 @@ export const pricingPlans = [
   {
     id: "Enterprise",
     name: "Enterprise",
-    description:
-      "Custom solutions for large-scale or specialized use cases.",
+    description: "Custom solutions for large-scale or specialized use cases.",
     price: "₹2500",
     credits: "28000",
     speed: "Maximum",
@@ -44,7 +42,7 @@ export const pricingPlans = [
     features: [
       "Dedicated processing capacity",
       "Custom rate limits",
-      "SLA & uptime guarantees",
+      "Optional SLA agreements available",
       "Dedicated account manager",
     ],
   },

@@ -16,7 +16,7 @@ export default function PricingPage() {
         transition={{ duration: 0.6 }}
       >
         <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-          <Sparkles className="w-4 h-4" /> Start for free with 500 credits.
+          <Sparkles className="w-4 h-4" />New accounts receive free credits to get started.
         </span>
         <h1 className="text-4xl md:text-5xl font-bold mt-2">Pricing Plans</h1>
         <p className="mt-4 text-lg">

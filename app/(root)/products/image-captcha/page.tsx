@@ -32,9 +32,9 @@ export default function ImageCaptchaPage() {
               Image-to-Text CAPTCHA Solver
             </h1>
             <p className="mt-6 text-lg">
-              Instantly extract text from image CAPTCHAs using advanced AI
-              vision models. Trusted by 500+ developers for automation and
-              verification workflows.
+              Instantly extract text from image-based CAPTCHA challenges using a
+              simple, synchronous API designed for authorized automation and
+              testing workflows.
             </p>
           </motion.div>
 
@@ -59,14 +59,14 @@ export default function ImageCaptchaPage() {
           <div className="space-y-2">
             <h2 className="text-4xl font-bold">What is an Image CAPTCHA?</h2>
             <p className="text-lg">
-              Image CAPTCHAs embed distorted or stylized characters inside
-              images to prevent automated access. They are intentionally noisy,
-              warped, or low-resolution to block bots.
+              Image CAPTCHAs display distorted or stylized characters inside an
+              image to differentiate humans from automated systems. They are
+              intentionally noisy, warped, or low-resolution to block bots.
             </p>
-            <p>
-              Solving them manually is slow and error-prone. Our AI-powered
-              solver decodes text accurately, handling complex distortions and
-              backgrounds effortlessly.
+            <p className="text-lg">
+              Solving them manually is slow and error-prone. Our API processes
+              such images and returns the detected text when possible, removing
+              the need for manual input during authorized workflows.
             </p>
           </div>
         </section>
@@ -80,9 +80,11 @@ export default function ImageCaptchaPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-background">How It Works</h2>
+            <h2 className="text-4xl font-bold text-background">
+              How it Works
+            </h2>
             <p className="mt-4 text-background">
-              Simple three-step workflow to extract text from any image CAPTCHA:
+              The workflow is intentionally simple and synchronous.{" "}
             </p>
           </motion.div>
 
@@ -96,30 +98,29 @@ export default function ImageCaptchaPage() {
             <div className="flex flex-col items-center gap-4">
               <Upload className="w-12 h-12 text-primary" />
               <h4 className="text-xl font-semibold text-background">
-                1. Submit Image URL
+                1. Submit an Image URL
               </h4>
               <p className="text-center text-background">
-                Provide the CAPTCHA image URL for processing.
+                Send a request containing the URL of the CAPTCHA image.{" "}
               </p>
             </div>
             <div className="flex flex-col items-center gap-4">
               <Loader2 className="w-12 h-12 text-primary" />
               <h4 className="text-xl font-semibold text-background">
-                2. AI Processing
+                2. Image Processing
               </h4>
               <p className="text-center text-background">
-                Advanced AI detects characters, corrects distortions, and
-                extracts text accurately.
+                The API analyzes the image and attempts to recognize embedded
+                characters.
               </p>
             </div>
             <div className="flex flex-col items-center gap-4">
               <Sparkles className="w-12 h-12 text-primary" />
               <h4 className="text-xl font-semibold text-background">
-                3. Receive Text
+                3. Receive the result
               </h4>
               <p className="text-center text-background">
-                Get the extracted text instantly, ready for automation,
-                verification, or scraping workflows.
+                The extracted text is returned directly in the API response.
               </p>
             </div>
           </motion.div>
@@ -134,10 +135,9 @@ export default function ImageCaptchaPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold">Key Features</h2>
+            <h2 className="text-4xl font-bold">Key Capabilities</h2>
             <p className="mt-4">
-              Designed for developers and enterprises seeking fast, reliable,
-              and accurate Image CAPTCHA solutions.
+              Designed to integrate cleanly into developer workflows.
             </p>
           </motion.div>
           <motion.div
@@ -150,13 +150,13 @@ export default function ImageCaptchaPage() {
             {[
               {
                 icon: Upload,
-                title: "AI-Powered OCR",
-                desc: "Automatically detects and extracts text from complex CAPTCHA images.",
+                title: "Image CAPTCHA Recognition",
+                desc: "Processes image-based CAPTCHA challenges and returns detected text.",
               },
               {
                 icon: Loader2,
-                title: "Fast Processing",
-                desc: "Solves CAPTCHAs in under 10 seconds, supporting real-time workflows.",
+                title: "Synchronous Responses",
+                desc: "Results are returned directly in the response body when the request completes.",
               },
               {
                 icon: Sparkles,
@@ -165,18 +165,18 @@ export default function ImageCaptchaPage() {
               },
               {
                 icon: ImageIcon,
-                title: "Batch Support",
-                desc: "Process hundreds of images simultaneously with minimal latency.",
+                title: "Secure Authentication",
+                desc: "All requests require a valid API key and sufficient credits.",
               },
               {
                 icon: Upload,
-                title: "Flexible Integration",
-                desc: "Works with API, scripts, or automation tools for easy deployment.",
+                title: "API-First Integration",
+                desc: "Simple REST endpoint compatible with modern stacks and automation tools.",
               },
               {
                 icon: Loader2,
-                title: "Multiple Formats",
-                desc: "Supports PNG, JPEG, GIF, and other common image formats.",
+                title: "Common Image Formats",
+                desc: "Supports standard image formats such as PNG and JPEG when accessible via URL.",
               },
             ].map((feature, i) => (
               <div
@@ -204,34 +204,36 @@ export default function ImageCaptchaPage() {
           </h4>
 
           <p className="text-background text-center">
-            Use this endpoint to extract text from any CAPTCHA image. Simply
-            send a POST request with the image URL and receive the extracted
-            text in response.
+            Use the Image CAPTCHA API by sending a POST request with the image
+            URL.
           </p>
 
           <pre className="rounded-2xl bg-gray-700 p-6 text-sm text-green-400 overflow-x-auto">
             {`POST /api/public/imageCaptcha
-Content-Type: application/json
 
+Content-Type: application/json,
+x-api-key: YOUR_API_KEY
+
+Request:
 {
   "imageUrl": "https://example.com/captcha.png"
 }
 
 Response:
 {
-  "text": "Extracted CAPTCHA text"
+"success": true,
+"message": "Text extracted successfully.",
+"text": "<extracted text>"
 }`}
           </pre>
 
           <div className="space-y-4 text-background">
             <h4 className="text-xl font-semibold text-background">
-              Step 1: Submit Image URL
+              Step 1: Send the Request
             </h4>
             <p>
-              Send a POST request to{" "}
-              <code className="text-green-400">/api/public/imageCaptcha</code>{" "}
-              with a valid image URL. Ensure the URL points directly to the
-              image file (PNG, JPG, or GIF).
+              Include your API key and the image URL in the request. Ensure the
+              URL points directly to the image file (PNG, JPG, or GIF).
             </p>
 
             <h4 className="text-xl font-semibold text-background">
@@ -239,18 +241,32 @@ Response:
             </h4>
             <p>
               The API will respond with a JSON object containing the extracted
-              text. Handle the response as needed for your automation,
-              verification, or scraping workflow.
+              text. Read the returned text from it.
             </p>
 
             <h4 className="text-xl font-semibold text-background">
-              Step 3: Error Handling
+              Step 3: Handle Errors
             </h4>
             <p>
-              If the image URL is missing or invalid, the API returns a{" "}
-              <code className="text-red-400">400</code> error. For processing
-              failures, a <code className="text-red-400">500</code> error is
-              returned with a descriptive message.
+              The API returns appropriate HTTP status codes, such as
+              <ul className="mt-2">
+                <li>
+                  <code className="text-red-400">400</code> for missing or
+                  invalid input.
+                </li>
+                <li>
+                  <code className="text-red-400">401</code> for missing or
+                  invalid API key.
+                </li>
+                <li>
+                  <code className="text-red-400">403</code> for insufficient
+                  credits.
+                </li>
+                <li>
+                  <code className="text-red-400">500</code> for internal
+                  processing errors.
+                </li>
+              </ul>
             </p>
           </div>
 
