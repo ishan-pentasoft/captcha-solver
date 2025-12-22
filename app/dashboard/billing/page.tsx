@@ -19,7 +19,7 @@ export default function BillingPage() {
 
       <div className="rounded-3xl p-6 shadow-lg border border-primary/50 bg-primary/10">
         <h2 className="text-xl font-bold mb-4">
-          Current Plan: {user.currentPlan ? user.currentPlan.name : "None"}
+          Current Plan: {user.currentPlan ? user.currentPlan.name : "Free"}
         </h2>
         <p className="text-md font-semibold">
           Credits Remaining: {user.credits.toLocaleString()}

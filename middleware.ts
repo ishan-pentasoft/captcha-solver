@@ -9,8 +9,9 @@ export async function middleware(req: NextRequest) {
   if (
     pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||
-    pathname.startsWith("/favicon.ico") || 
-    pathname.startsWith("/docs")
+    pathname.startsWith("/favicon.ico") ||
+    pathname.startsWith("/docs") ||
+    pathname.match(/\.(png|jpg|jpeg|gif|svg|webp|ico)$/)
   ) {
     return NextResponse.next();
   }

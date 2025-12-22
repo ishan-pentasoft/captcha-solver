@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const { keyRecord, error } = await authenticateApiKey(rawKey!);
     if (error) return error;
 
-    // Deduct 1 credit and increment totalRequests
+    // Deduct credits and increment totalRequests
     await prisma.user.update({
       where: { id: keyRecord.userId },
       data: {

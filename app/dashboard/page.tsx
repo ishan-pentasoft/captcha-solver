@@ -26,7 +26,7 @@ export default function DashboardPage() {
           value={
             user.currentPlan
               ? `${user.currentPlan.name} (₹${user.currentPlan.price})`
-              : "None"
+              : "Free"
           }
           icon={<Zap size={40} />}
         />

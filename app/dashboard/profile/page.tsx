@@ -58,7 +58,7 @@ export default function ProfilePage() {
           <InfoRow
             icon={<CreditCard size={18} />}
             label="Plan"
-            value={user.currentPlan?.name ?? "None"}
+            value={user.currentPlan?.name ?? "Free"}
           />
           <InfoRow
             icon={<Key size={18} />}

@@ -123,10 +123,10 @@ export default function PlaygroundPage() {
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             placeholder="xxxxxxxxxxxxxxxxx"
-            className="w-full mt-2 px-4 py-3 rounded-2xl border border-primary bg-background font-mono focus:ring-2 focus:ring-primary focus:outline-none transition"
+            className="w-full mt-2 px-4 py-3 rounded-2xl border border-primary font-mono focus:ring-2 focus:ring-primary focus:outline-none transition"
           />
-          <p className="text-xs text-muted-foreground mt-1">
-            Use an active API key from the API Keys page
+          <p className="text-xs mt-4">
+            Use an active API key from the API Key page.
           </p>
         </div>
 
@@ -159,7 +159,7 @@ export default function PlaygroundPage() {
               type="file"
               accept="audio/*"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
-              className="block w-full text-sm text-primary file:rounded-full file:border-0 file:bg-primary/20 file:text-primary hover:file:bg-primary/30 transition"
+              className="block w-full text-sm text-primary file:rounded-full file:p-2 file:border-0 file:bg-primary/20 file:text-primary hover:file:bg-primary/30 transition"
             />
           )}
 

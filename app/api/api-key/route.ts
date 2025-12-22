@@ -28,19 +28,11 @@ export async function POST() {
   const fullUser = await prisma.user.findUnique({
     where: { id: user.id },
     select: {
-      currentPlan: true,
       credits: true,
     },
   });
 
-  if (!fullUser?.currentPlan) {
-    return NextResponse.json(
-      { error: "You must purchase a plan to generate an API key." },
-      { status: 403 }
-    );
-  }
-
-  if (!fullUser.credits || fullUser.credits <= 0) {
+  if (!fullUser || fullUser.credits <= 0) {
     return NextResponse.json(
       { error: "You do not have enough credits to generate an API key." },
       { status: 403 }

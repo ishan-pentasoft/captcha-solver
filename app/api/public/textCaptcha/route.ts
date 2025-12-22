@@ -10,7 +10,6 @@ export async function POST(req: NextRequest) {
 
     const rawKey = req.headers.get("x-api-key");
 
-
     if (!text || typeof text !== "string") {
       return NextResponse.json(
         { success: false, error: "text is required" },
@@ -22,7 +21,7 @@ export async function POST(req: NextRequest) {
     const { keyRecord, error } = await authenticateApiKey(rawKey!);
     if (error) return error;
 
-    // Deduct 1 credit and increment totalRequests
+    // Deduct credits and increment totalRequests
     await prisma.user.update({
       where: { id: keyRecord.userId },
       data: {

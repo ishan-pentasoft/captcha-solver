@@ -13,7 +13,7 @@ interface ApiKey {
 }
 
 export default function ApiKeyPage() {
-  const { user, refreshUser } = useUser(); 
+  const { user, refreshUser } = useUser();
   const [keys, setKeys] = useState<ApiKey[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingId, setLoadingId] = useState<string | null>(null);
@@ -44,15 +44,6 @@ export default function ApiKeyPage() {
   };
 
   const generateKey = async () => {
-    if (!user?.currentPlan) {
-      toast("Purchase a plan from Billing page to generate an API key.");
-      return;
-    }
-
-    if(user?.currentPlan && user.credits <= 0) {
-      toast("You do not have sufficient credits to generate API key. Purchase a plan to get credits.");
-    }
-
     setLoadingId("regen");
     try {
       const res = await fetch("/api/api-key", { method: "POST" });
@@ -89,7 +80,9 @@ export default function ApiKeyPage() {
     <div className="space-y-8">
       <div className="text-center lg:text-left">
         <h1 className="text-2xl sm:text-4xl font-bold">API Management</h1>
-        <p className="text-foreground/80 mt-2">Generate your API key securely.</p>
+        <p className="text-foreground/80 mt-2">
+          Generate your API key securely.
+        </p>
       </div>
 
       {keys.length === 0 ? (
