@@ -11,11 +11,11 @@ export const navLinks = [
     href: "/pricing",
     external: false,
   },
-  {
-    title: "Blog",
-    href: "/blogs",
-    external: false,
-  },
+  // {
+  //   title: "Blog",
+  //   href: "/blogs",
+  //   external: false,
+  // },
   {
     title: "Documentation",
     href: "/docs",
